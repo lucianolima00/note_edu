@@ -1,18 +1,26 @@
 package com.example.noteedu.note;
 
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Note {
+    @Id
+    @SequenceGenerator(
+            name = "note_sequence",
+            sequenceName = "note_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "note_sequence"
+    )
     private Long id;
     private String title;
     private String description;
-
     private Long notebookId;
 
-    public Note(Long id, String title, String description, Long notebookId) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.notebookId = notebookId;
+    public Note() {
     }
 
     public Long getId() {
