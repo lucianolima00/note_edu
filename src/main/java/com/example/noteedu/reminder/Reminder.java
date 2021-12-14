@@ -3,29 +3,26 @@ package com.example.noteedu.reminder;
 import com.example.noteedu.note.Note;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Reminder extends Note {
-    private Date dueDate;
-    private long tagId;
+    private LocalDate dueDate;
+
+    public Reminder(long id, String title, String description, LocalDate dueDate) {
+        super(id, title, description);
+        this.dueDate = dueDate;
+    }
 
     public Reminder() {
+        super();
     }
 
-    public long getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(long tagId) {
-        this.tagId = tagId;
-    }
-
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 }

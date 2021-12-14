@@ -18,9 +18,18 @@ public class Note {
     private Long id;
     private String title;
     private String description;
-    private Long notebookId;
 
-    public Note() {
+    public Note() {}
+
+    public Note(Long id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
+    public Note(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public Long getId() {
@@ -47,13 +56,12 @@ public class Note {
         this.description = description;
     }
 
-    public Long getNotebookId() {
-        return notebookId;
+    @Override
+    public String toString() {
+        return "Note: {" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description=" + description + '\'' +
+                "}";
     }
-
-    public void setNotebookId(Long notebookId) {
-        this.notebookId = notebookId;
-    }
-
-
 }
