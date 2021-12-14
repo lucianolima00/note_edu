@@ -2,11 +2,11 @@ package com.example.noteedu.models;
 
 import java.util.Date;
 
-public class Remider extends Note {
+public class Reminder extends Note {
     private Date dueDate;
     private long tagId;
 
-    public Remider(long id, String title, String description, long notebookId, Date dueDate, long tagId) {
+    public Reminder(long id, String title, String description, long notebookId, Date dueDate, long tagId) {
         super(id, title, description, notebookId);
         this.dueDate = dueDate;
         this.tagId = tagId;
