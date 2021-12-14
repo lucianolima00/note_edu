@@ -1,20 +1,26 @@
-package com.example.noteedu.models;
+package com.example.noteedu.note;
+
 
 public class Note {
-    private final long id;
+    private Long id;
     private String title;
     private String description;
-    private long notebookId;
 
-    public Note(long id, String title, String description, long notebookId) {
+    private Long notebookId;
+
+    public Note(Long id, String title, String description, Long notebookId) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.notebookId = notebookId;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -33,11 +39,11 @@ public class Note {
         this.description = description;
     }
 
-    public long getNotebookId() {
+    public Long getNotebookId() {
         return notebookId;
     }
 
-    public void setNotebookId(long notebookId) {
+    public void setNotebookId(Long notebookId) {
         this.notebookId = notebookId;
     }
 

@@ -1,4 +1,6 @@
-package com.example.noteedu.models;
+package com.example.noteedu.reminder;
+
+import com.example.noteedu.note.Note;
 
 import java.util.Date;
 
