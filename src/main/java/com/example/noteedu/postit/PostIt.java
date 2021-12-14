@@ -1,4 +1,6 @@
-package com.example.noteedu.models;
+package com.example.noteedu.postit;
+
+import com.example.noteedu.note.Note;
 
 public class PostIt extends Note {
     private long tagId;
