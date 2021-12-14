@@ -6,7 +6,6 @@ public class PostIt extends Note {
     private long tagId;
 
     public PostIt(long id, String title, String description, long notebookId, long tagId) {
-        super(id, title, description, notebookId);
         this.tagId = tagId;
     }
 
