@@ -2,36 +2,31 @@ package com.example.noteedu.postit;
 
 import com.example.noteedu.note.Note;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import java.time.LocalDate;
 
 @Entity
-@Table
 public class PostIt extends Note {
-    @Id
-    @SequenceGenerator(
-            name = "postit_sequence",
-            sequenceName = "postit_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "postit_sequence"
-    )
-    private long tagId;
+    private LocalDate dueDate;
 
-    public PostIt(long id, String title, String description, long notebookId, long tagId) {
-        this.tagId = tagId;
+    public PostIt(String title, String description, LocalDate dueDate) {
+        super(title, description);
+        this.dueDate = dueDate;
+    }
+
+    public PostIt(long id, String title, String description, LocalDate dueDate) {
+        super(id, title, description);
+        this.dueDate = dueDate;
     }
 
     public PostIt() {
-
+        super();
+    }
+    public LocalDate getDueDate() {
+        return dueDate;
     }
 
-    public long getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(long tagId) {
-        this.tagId = tagId;
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 }

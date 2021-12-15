@@ -3,7 +3,7 @@ package com.example.noteedu.reminder;
 import com.example.noteedu.note.Note;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table
@@ -18,25 +18,28 @@ public class Reminder extends Note {
             strategy = GenerationType.SEQUENCE,
             generator = "reminder_sequence"
     )
-    private Date dueDate;
     private long tagId;
+    private LocalDate dueDate;
+
+    public Reminder(String title, String description, LocalDate dueDate) {
+        super(title, description);
+        this.dueDate = dueDate;
+    }
+
+    public Reminder(long id, String title, String description, LocalDate dueDate) {
+        super(id, title, description);
+        this.dueDate = dueDate;
+    }
 
     public Reminder() {
+        super();
     }
 
-    public long getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(long tagId) {
-        this.tagId = tagId;
-    }
-
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 }

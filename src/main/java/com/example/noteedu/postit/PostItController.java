@@ -1,14 +1,12 @@
 package com.example.noteedu.postit;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 @RestController
-@RequestMapping("api/v1/reminder")
+@RequestMapping("api/v1/postIt")
 public class PostItController {
 
     private final PostItService postItService;
@@ -19,7 +17,25 @@ public class PostItController {
     }
 
     @GetMapping
-    public List<PostIt> getPostIts() {
+    public List<PostIt> index() {
         return postItService.getPostIts();
+    }
+
+    @PostMapping
+    public PostIt create(@RequestBody PostIt postIt) {
+        return postItService.createPostIt(postIt);
+    }
+
+    @PutMapping(path = "{postItId}")
+    public void update(
+            @PathVariable("postItId") Long id,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String description) {
+        postItService.updatePostIt(id,title, description);
+    }
+
+    @PostMapping(path = "{postItId}")
+    public void delete(@PathVariable("postItId") Long id) {
+        postItService.deletePostIt(id);
     }
 }
