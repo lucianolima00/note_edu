@@ -1,5 +1,7 @@
 package com.example.noteedu.note;
 
+import com.example.noteedu.user.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,12 +21,17 @@ public class Note {
     private String title;
     private String description;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Note() {}
 
-    public Note(Long id, String title, String description) {
+    public Note(Long id, String title, String description, User user) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.user = user;
     }
 
     public Note(String title, String description) {
@@ -56,12 +63,21 @@ public class Note {
         this.description = description;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Note: {" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description=" + description + '\'' +
+                ", user=" + user.toString() + '\'' +
                 "}";
     }
 }

@@ -2,6 +2,7 @@ package com.example.noteedu.reminder;
 
 import com.example.noteedu.note.Note;
 import com.example.noteedu.tag.Tag;
+import com.example.noteedu.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,8 +26,8 @@ public class Reminder extends Note {
         this.tag = tag;
     }
 
-    public Reminder(long id, String title, String description, LocalDate dueDate, Tag tag) {
-        super(id, title, description);
+    public Reminder(long id, String title, String description, LocalDate dueDate, Tag tag, User user) {
+        super(id, title, description, user);
         this.dueDate = dueDate;
         this.tag = tag;
     }
@@ -49,5 +50,17 @@ public class Reminder extends Note {
 
     public void setTag(Tag tag) {
         this.tag = tag;
+    }
+
+    @Override
+    public String toString() {
+        return "Reminder: {" +
+                "id=" + super.getId() +
+                ", title='" + super.getTitle() + '\'' +
+                ", description='" + super.getDescription() + '\'' +
+                ", due_date='" + dueDate + '\'' +
+                ", tag='" + tag.toString() + '\'' +
+                ", user='" + super.getUser().toString() + '\'' +
+                "}";
     }
 }

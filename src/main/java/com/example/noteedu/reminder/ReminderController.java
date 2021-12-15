@@ -27,9 +27,12 @@ public class ReminderController {
     }
 
     @PutMapping(path = "{reminderId}")
-    public void update(@PathVariable("reminderId") Long id, @RequestBody Reminder reminder) {
-
-        reminderService.updateReminder(reminder);
+    public void update(
+            @PathVariable("reminderId") Long id,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Long tagId) {
+        reminderService.updateReminder(id,title, description, tagId);
     }
 
     @PostMapping(path = "{reminderId}")

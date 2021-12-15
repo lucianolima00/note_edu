@@ -1,6 +1,7 @@
 package com.example.noteedu.postit;
 
 import com.example.noteedu.note.Note;
+import com.example.noteedu.user.User;
 
 import javax.persistence.Entity;
 import java.time.LocalDate;
@@ -14,8 +15,8 @@ public class PostIt extends Note {
         this.dueDate = dueDate;
     }
 
-    public PostIt(long id, String title, String description, LocalDate dueDate) {
-        super(id, title, description);
+    public PostIt(long id, String title, String description, LocalDate dueDate, User user) {
+        super(id, title, description, user);
         this.dueDate = dueDate;
     }
 
@@ -29,5 +30,16 @@ public class PostIt extends Note {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+    }
+
+    @Override
+    public String toString() {
+        return "PostIt: {" +
+                "id=" + super.getId() +
+                ", title='" + super.getTitle() + '\'' +
+                ", description='" + super.getDescription() + '\'' +
+                ", due_date='" + dueDate + '\'' +
+                ", user='" + super.getUser().toString() + '\'' +
+                "}";
     }
 }

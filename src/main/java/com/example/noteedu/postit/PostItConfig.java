@@ -14,9 +14,9 @@ public class PostItConfig {
     CommandLineRunner postItCommandLine(PostItRepository repository) {
         return args -> {
             PostIt postIt = new PostIt(
-                    "Test",
-                    "Test",
-                    LocalDate.of(2000, Month.JANUARY, 5)
+                "Test",
+                "Test",
+                LocalDate.of(2000, Month.JANUARY, 5)
             );
 
             repository.save(postIt);
