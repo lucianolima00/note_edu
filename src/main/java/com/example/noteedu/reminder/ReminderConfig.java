@@ -14,9 +14,9 @@ public class ReminderConfig {
     CommandLineRunner reminderCommandLine(ReminderRepository repository) {
         return args -> {
             Reminder reminder = new Reminder(
-                    "Test",
-                    "Test",
-                    LocalDate.of(2000, Month.JANUARY, 5)
+                "Test",
+                "Test",
+                LocalDate.of(2000, Month.JANUARY, 5)
             );
 
             repository.save(reminder);

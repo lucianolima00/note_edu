@@ -1,5 +1,6 @@
 package com.example.noteedu.reminder;
 
+import com.example.noteedu.tag.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,12 @@ import java.util.Objects;
 public class ReminderService {
 
     private final ReminderRepository reminderRepository;
+    private final TagRepository tagRepository;
 
     @Autowired
-    public ReminderService(ReminderRepository reminderRepository) {
+    public ReminderService(ReminderRepository reminderRepository, TagRepository tagRepository) {
         this.reminderRepository = reminderRepository;
+        this.tagRepository = tagRepository;
     }
 
     public List<Reminder> getReminders() {
@@ -26,15 +29,15 @@ public class ReminderService {
     }
 
     @Transactional
-    public void updateReminder(Long id, String title, String description) {
-        Reminder reminder = reminderRepository.findById(id).orElseThrow(() -> new IllegalStateException("reminder with id "+ id + " does not exist"));
+    public void updateReminder(Reminder newReminder) {
+        Reminder reminder = reminderRepository.findById(newReminder.getId()).orElseThrow(() -> new IllegalStateException("reminder with id "+ newReminder.getId() + " does not exist"));
 
-        if (title != null && title.length() > 0 && !Objects.equals(reminder.getTitle(), title)){
-            reminder.setTitle(title);
+        if (newReminder.getTitle() != null && newReminder.getTitle().length() > 0 && !Objects.equals(reminder.getTitle(), newReminder.getTitle())){
+            reminder.setTitle(newReminder.getTitle());
         }
 
-        if (description != null && description.length() > 0 && !Objects.equals(reminder.getDescription(), description)){
-            reminder.setDescription(description);
+        if (newReminder.getDescription() != null && newReminder.getDescription().length() > 0 && !Objects.equals(reminder.getDescription(), newReminder.getDescription())){
+            reminder.setDescription(newReminder.getDescription());
         }
     }
 
