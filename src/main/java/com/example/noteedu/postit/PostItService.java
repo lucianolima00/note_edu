@@ -25,12 +25,6 @@ public class PostItService {
         return postItRepository.save(postIt);
     }
 
-    public void deletePostIt(Long id) {
-        PostIt postIt = postItRepository.findById(id).orElseThrow(() -> new IllegalStateException("postIt with id "+ id + " does not exist"));
-
-        postItRepository.delete(postIt);
-    }
-
     @Transactional
     public void updatePostIt(Long id, String title, String description) {
         PostIt postIt = postItRepository.findById(id).orElseThrow(() -> new IllegalStateException("postIt with id "+ id + " does not exist"));
@@ -40,7 +34,13 @@ public class PostItService {
         }
 
         if (description != null && description.length() > 0 && !Objects.equals(postIt.getDescription(), description)){
-            postIt.setDescription(title);
+            postIt.setDescription(description);
         }
+    }
+
+    public void deletePostIt(Long id) {
+        PostIt postIt = postItRepository.findById(id).orElseThrow(() -> new IllegalStateException("postIt with id "+ id + " does not exist"));
+
+        postItRepository.delete(postIt);
     }
 }

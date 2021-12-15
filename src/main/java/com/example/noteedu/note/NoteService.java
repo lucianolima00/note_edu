@@ -25,12 +25,6 @@ public class NoteService {
         return noteRepository.save(note);
     }
 
-    public void deleteNote(Long id) {
-        Note note = noteRepository.findById(id).orElseThrow(() -> new IllegalStateException("note with id "+ id + " does not exist"));
-
-        noteRepository.delete(note);
-    }
-
     @Transactional
     public void updateNote(Long id, String title, String description) {
         Note note = noteRepository.findById(id).orElseThrow(() -> new IllegalStateException("note with id "+ id + " does not exist"));
@@ -42,5 +36,11 @@ public class NoteService {
         if (description != null && description.length() > 0 && !Objects.equals(note.getDescription(), description)){
             note.setDescription(title);
         }
+    }
+
+    public void deleteNote(Long id) {
+        Note note = noteRepository.findById(id).orElseThrow(() -> new IllegalStateException("note with id "+ id + " does not exist"));
+
+        noteRepository.delete(note);
     }
 }

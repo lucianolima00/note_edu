@@ -25,12 +25,6 @@ public class ReminderService {
         return reminderRepository.save(reminder);
     }
 
-    public void deleteReminder(Long id) {
-        Reminder reminder = reminderRepository.findById(id).orElseThrow(() -> new IllegalStateException("reminder with id "+ id + " does not exist"));
-
-        reminderRepository.delete(reminder);
-    }
-
     @Transactional
     public void updateReminder(Long id, String title, String description) {
         Reminder reminder = reminderRepository.findById(id).orElseThrow(() -> new IllegalStateException("reminder with id "+ id + " does not exist"));
@@ -40,7 +34,13 @@ public class ReminderService {
         }
 
         if (description != null && description.length() > 0 && !Objects.equals(reminder.getDescription(), description)){
-            reminder.setDescription(title);
+            reminder.setDescription(description);
         }
+    }
+
+    public void deleteReminder(Long id) {
+        Reminder reminder = reminderRepository.findById(id).orElseThrow(() -> new IllegalStateException("reminder with id "+ id + " does not exist"));
+
+        reminderRepository.delete(reminder);
     }
 }
