@@ -6,7 +6,19 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table
 public class Reminder extends Note {
+    @Id
+    @SequenceGenerator(
+            name = "reminder_sequence",
+            sequenceName = "reminder_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "reminder_sequence"
+    )
+    private long tagId;
     private LocalDate dueDate;
 
     public Reminder(String title, String description, LocalDate dueDate) {

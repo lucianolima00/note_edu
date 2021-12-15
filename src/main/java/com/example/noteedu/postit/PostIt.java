@@ -22,7 +22,6 @@ public class PostIt extends Note {
     public PostIt() {
         super();
     }
-
     public LocalDate getDueDate() {
         return dueDate;
     }
