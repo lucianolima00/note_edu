@@ -1,25 +1,25 @@
-package com.example.noteedu.reminder;
+package com.example.noteedu.postit;
 
 import com.example.noteedu.note.Note;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity
-public class Reminder extends Note {
+public class PostIt extends Note {
     private LocalDate dueDate;
 
-    public Reminder(String title, String description, LocalDate dueDate) {
+    public PostIt(String title, String description, LocalDate dueDate) {
         super(title, description);
         this.dueDate = dueDate;
     }
 
-    public Reminder(long id, String title, String description, LocalDate dueDate) {
+    public PostIt(long id, String title, String description, LocalDate dueDate) {
         super(id, title, description);
         this.dueDate = dueDate;
     }
 
-    public Reminder() {
+    public PostIt() {
         super();
     }
 
