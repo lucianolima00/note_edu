@@ -72,6 +72,7 @@ public class Notebook {
         return "Notebook: {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
                 "}";
     }
 }

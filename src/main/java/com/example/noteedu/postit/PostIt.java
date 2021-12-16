@@ -52,6 +52,7 @@ public class PostIt extends Note {
                 ", title='" + super.getTitle() + '\'' +
                 ", description='" + super.getDescription() + '\'' +
                 ", due_date='" + dueDate + '\'' +
+                ", color='" + color + '\'' +
                 ", user='" + super.getUser().toString() + '\'' +
                 "}";
     }
