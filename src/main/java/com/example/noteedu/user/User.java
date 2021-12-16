@@ -32,6 +32,9 @@ public class User {
             cascade = CascadeType.ALL)
     private Set<Note> notes;
 
+    @ManyToMany(mappedBy = "guests")
+    private Set<Reminder> reminders;
+
 
     public User() {
 

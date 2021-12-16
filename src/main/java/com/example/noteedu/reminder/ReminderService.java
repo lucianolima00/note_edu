@@ -34,15 +34,15 @@ public class ReminderService {
         Reminder reminder = reminderRepository.findById(id).orElseThrow(() -> new IllegalStateException("reminder with id "+ id + " does not exist"));
         Tag tag = tagRepository.findById(tagId).orElseThrow(() -> new IllegalStateException("tag with id "+ id + " does not exist"));
 
-        if (title != null && title.length() > 0 && !Objects.equals(reminder.getTitle(), title)){
+        if (title != null && title.length() > 0 && !Objects.equals(reminder.getTitle(), title)) {
             reminder.setTitle(title);
         }
 
-        if (description != null && description.length() > 0 && !Objects.equals(reminder.getDescription(), description)){
+        if (description != null && description.length() > 0 && !Objects.equals(reminder.getDescription(), description)) {
             reminder.setDescription(description);
         }
 
-        if (tag != null && !Objects.equals(reminder.getTag(), tag)){
+        if (tag != null && !Objects.equals(reminder.getTag(), tag)) {
             reminder.setTag(tag);
         }
     }

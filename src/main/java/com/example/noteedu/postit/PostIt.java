@@ -26,7 +26,11 @@ public class PostIt extends Note {
 
     @Override
     public void execute() {
-        this.setFinished(true);
+        try {
+            this.setFinished(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public LocalDate getDueDate() {

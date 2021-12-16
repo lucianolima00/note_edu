@@ -6,10 +6,19 @@ import com.example.noteedu.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 public class Reminder extends Note {
     private LocalDate dueDate;
+
+    @ManyToMany
+    @JoinTable(
+            name = "reminder_user",
+            joinColumns = @JoinColumn(name = "reminder_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> guests;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
@@ -26,10 +35,11 @@ public class Reminder extends Note {
         this.tag = tag;
     }
 
-    public Reminder(long id, String title, String description, Boolean finished, LocalDate dueDate, Tag tag, User user) {
+    public Reminder(long id, String title, String description, Boolean finished, LocalDate dueDate, Tag tag, User user, Set<User> guests) {
         super(id, title, description, finished, user);
         this.dueDate = dueDate;
         this.tag = tag;
+        this.guests = guests;
     }
 
     public Reminder() {
@@ -38,9 +48,13 @@ public class Reminder extends Note {
 
     @Override
     public void execute() {
-        Tag tag = new Tag("Finished", "#FFFFFF");
-        this.setTag(tag);
-        this.setFinished(true);
+        try {
+            Tag tag = new Tag("Finished", "#FFFFFF");
+            this.setTag(tag);
+            this.setFinished(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public LocalDate getDueDate() {
