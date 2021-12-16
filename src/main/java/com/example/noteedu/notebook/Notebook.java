@@ -1,23 +1,23 @@
-package com.example.noteedu.tag;
+package com.example.noteedu.notebook;
 
-import com.example.noteedu.reminder.Reminder;
+import com.example.noteedu.note.Note;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table
-public class Tag {
+public class Notebook {
 
     @Id
     @SequenceGenerator(
-            name = "tag_sequence",
-            sequenceName = "tag_sequence",
+            name = "notebook_sequence",
+            sequenceName = "notebook_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "tag_sequence"
+            generator = "notebook_sequence"
     )
     private Long id;
 
@@ -26,29 +26,29 @@ public class Tag {
 
     private String color;
 
-    @OneToMany(mappedBy = "tag", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "notebook", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private Set<Reminder> reminders;
+    private Set<Note> notes;
 
-    public Tag() {
+    public Notebook() {
     }
 
-    public Tag(String name, String color) {
+    public Notebook(String name, String color) {
         this.name = name;
         this.color = color;
     }
 
-    public Tag(String name, String color, Set<Reminder> reminders) {
+    public Notebook(String name, String color, Set<Note> notes) {
         this.name = name;
         this.color = color;
-        this.reminders = reminders;
+        this.notes = notes;
     }
 
-    public Tag(Long id, String name, String color, Set<Reminder> reminders) {
+    public Notebook(Long id, String name, String color, Set<Note> notes) {
         this.id = id;
         this.name = name;
         this.color = color;
-        this.reminders = reminders;
+        this.notes = notes;
     }
 
     public String getName() {
@@ -69,7 +69,7 @@ public class Tag {
 
     @Override
     public String toString() {
-        return "Tag: {" +
+        return "Notebook: {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 "}";

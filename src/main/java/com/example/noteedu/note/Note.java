@@ -1,5 +1,6 @@
 package com.example.noteedu.note;
 
+import com.example.noteedu.notebook.Notebook;
 import com.example.noteedu.user.User;
 
 import javax.persistence.*;
@@ -26,14 +27,19 @@ public abstract class Note {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "notebook_id")
+    private Notebook notebook;
+
     public Note() {}
 
-    public Note(Long id, String title, String description, Boolean finished, User user) {
+    public Note(Long id, String title, String description, Boolean finished, User user, Notebook notebook) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.finished = finished;
         this.user = user;
+        this.notebook = notebook;
     }
 
     public Note(String title, String description, Boolean finished) {

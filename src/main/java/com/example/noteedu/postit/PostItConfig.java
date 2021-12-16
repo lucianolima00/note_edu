@@ -17,8 +17,8 @@ public class PostItConfig {
                 "Test",
                 "Test",
                 false,
-                LocalDate.of(2000, Month.JANUARY, 5)
-            );
+                LocalDate.of(2000, Month.JANUARY, 5),
+                "4EC23E");
 
             repository.save(postIt);
         };

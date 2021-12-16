@@ -1,6 +1,7 @@
 package com.example.noteedu.reminder;
 
 import com.example.noteedu.note.Note;
+import com.example.noteedu.notebook.Notebook;
 import com.example.noteedu.tag.Tag;
 import com.example.noteedu.user.User;
 
@@ -35,8 +36,8 @@ public class Reminder extends Note {
         this.tag = tag;
     }
 
-    public Reminder(long id, String title, String description, Boolean finished, LocalDate dueDate, Tag tag, User user, Set<User> guests) {
-        super(id, title, description, finished, user);
+    public Reminder(long id, String title, String description, Boolean finished, User user, Notebook notebook, LocalDate dueDate, Tag tag, Set<User> guests) {
+        super(id, title, description, finished, user, notebook);
         this.dueDate = dueDate;
         this.tag = tag;
         this.guests = guests;
