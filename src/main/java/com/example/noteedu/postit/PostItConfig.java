@@ -16,6 +16,7 @@ public class PostItConfig {
             PostIt postIt = new PostIt(
                 "Test",
                 "Test",
+                false,
                 LocalDate.of(2000, Month.JANUARY, 5)
             );
 

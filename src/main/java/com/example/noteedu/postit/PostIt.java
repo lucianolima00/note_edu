@@ -10,18 +10,23 @@ import java.time.LocalDate;
 public class PostIt extends Note {
     private LocalDate dueDate;
 
-    public PostIt(String title, String description, LocalDate dueDate) {
-        super(title, description);
+    public PostIt(String title, String description, Boolean finished, LocalDate dueDate) {
+        super(title, description, finished);
         this.dueDate = dueDate;
     }
 
-    public PostIt(long id, String title, String description, LocalDate dueDate, User user) {
-        super(id, title, description, user);
+    public PostIt(long id, String title, String description, Boolean finished, LocalDate dueDate, User user) {
+        super(id, title, description, finished, user);
         this.dueDate = dueDate;
     }
 
     public PostIt() {
         super();
+    }
+
+    @Override
+    public void execute() {
+        this.setFinished(true);
     }
 
     public LocalDate getDueDate() {

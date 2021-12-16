@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Note {
+public abstract class Note {
     @Id
     @SequenceGenerator(
             name = "note_sequence",
@@ -20,6 +20,7 @@ public class Note {
     private Long id;
     private String title;
     private String description;
+    private Boolean finished;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -27,16 +28,18 @@ public class Note {
 
     public Note() {}
 
-    public Note(Long id, String title, String description, User user) {
+    public Note(Long id, String title, String description, Boolean finished, User user) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.finished = finished;
         this.user = user;
     }
 
-    public Note(String title, String description) {
+    public Note(String title, String description, Boolean finished) {
         this.title = title;
         this.description = description;
+        this.finished = finished;
     }
 
     public Long getId() {
@@ -63,6 +66,14 @@ public class Note {
         this.description = description;
     }
 
+    public Boolean getFinished() {
+        return finished;
+    }
+
+    public void setFinished(Boolean finished) {
+        this.finished = finished;
+    }
+
     public User getUser() {
         return user;
     }
@@ -70,6 +81,8 @@ public class Note {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public abstract void execute();
 
     @Override
     public String toString() {

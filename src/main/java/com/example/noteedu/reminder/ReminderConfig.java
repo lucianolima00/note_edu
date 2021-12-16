@@ -16,6 +16,7 @@ public class ReminderConfig {
             Reminder reminder = new Reminder(
                 "Test",
                 "Test",
+                false,
                 LocalDate.of(2000, Month.JANUARY, 5)
             );
 

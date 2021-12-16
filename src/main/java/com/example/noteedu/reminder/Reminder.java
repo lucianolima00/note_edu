@@ -15,25 +15,32 @@ public class Reminder extends Note {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
-    public Reminder(String title, String description, LocalDate dueDate) {
-        super(title, description);
+    public Reminder(String title, String description, Boolean finished, LocalDate dueDate) {
+        super(title, description, finished);
         this.dueDate = dueDate;
     }
 
-    public Reminder(String title, String description, LocalDate dueDate, Tag tag) {
-        super(title, description);
+    public Reminder(String title, String description, Boolean finished, LocalDate dueDate, Tag tag) {
+        super(title, description, finished);
         this.dueDate = dueDate;
         this.tag = tag;
     }
 
-    public Reminder(long id, String title, String description, LocalDate dueDate, Tag tag, User user) {
-        super(id, title, description, user);
+    public Reminder(long id, String title, String description, Boolean finished, LocalDate dueDate, Tag tag, User user) {
+        super(id, title, description, finished, user);
         this.dueDate = dueDate;
         this.tag = tag;
     }
 
     public Reminder() {
         super();
+    }
+
+    @Override
+    public void execute() {
+        Tag tag = new Tag("Finished", "#FFFFFF");
+        this.setTag(tag);
+        this.setFinished(true);
     }
 
     public LocalDate getDueDate() {
