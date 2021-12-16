@@ -30,8 +30,9 @@ public class ReminderController {
     public void update(
             @PathVariable("reminderId") Long id,
             @RequestParam(required = false) String title,
-            @RequestParam(required = false) String description) {
-        reminderService.updateReminder(id,title, description);
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Long tagId) {
+        reminderService.updateReminder(id,title, description, tagId);
     }
 
     @PostMapping(path = "{reminderId}")
