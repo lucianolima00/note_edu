@@ -72,6 +72,7 @@ public class Tag {
         return "Tag: {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
                 "}";
     }
 }
