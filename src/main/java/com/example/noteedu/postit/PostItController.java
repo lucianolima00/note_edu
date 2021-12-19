@@ -1,5 +1,7 @@
 package com.example.noteedu.postit;
 
+import com.example.noteedu.customExceptions.CustomException;
+import com.example.noteedu.customExceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +15,6 @@ public class PostItController {
 
     @Autowired
     public PostItController(PostItService postItService) {
-
         this.postItService = postItService;
     }
 
@@ -24,17 +25,15 @@ public class PostItController {
 
     @PostMapping
     public PostIt create(@RequestBody PostIt postIt) {
-
         return postItService.createPostIt(postIt);
     }
 
     @PutMapping(path = "{postItId}")
     public void update(
-        @PathVariable("postItId") Long id,
-        @RequestParam(required = false) String title,
-        @RequestParam(required = false) String description) {
-             postItService.updatePostIt(id,title, description);
-
+            @PathVariable("postItId") Long id,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String description) throws CustomException, NotFound {
+        postItService.updatePostIt(id,title, description);
     }
 
     @PostMapping(path = "{postItId}")

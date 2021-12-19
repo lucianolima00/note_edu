@@ -1,13 +1,15 @@
 package com.example.noteedu.user;
 
-import java.util.Set;
-import java.util.Objects;
-import javax.persistence.*;
-import com.example.noteedu.note.Note;
-import com.example.noteedu.reminder.Reminder;
+import com.example.noteedu.customExceptions.CustomException;
 import com.example.noteedu.customExceptions.NotFound;
 import com.example.noteedu.customExceptions.WrongPassword;
-import com.example.noteedu.customExceptions.CustomException;
+import com.example.noteedu.note.Note;
+import com.example.noteedu.reminder.Reminder;
+
+import javax.persistence.*;
+import java.util.Objects;
+import java.util.Set;
+
 import static jdk.nashorn.internal.objects.ArrayBufferView.length;
 
 @Entity
@@ -44,7 +46,7 @@ public class User {
 
     }
 
-    public User(String name, String email, String password, Long id) {
+    public User(String name, String email, String password) {
     }
 
     public Long getId() {
@@ -79,25 +81,6 @@ public class User {
         this.password = password;
     }
 
-    public void checkPassword(String password) throws WrongPassword{
-        if (!Objects.equals(this.getPassword(), User.this.password)){
-            throw new WrongPassword();
-        }
-    }
-    public int searchUser(String email) throws NotFound {
-        //conectar no banco de dados
-        //buscar usu�rio por email
-        //retornar usu�rio encontrado
-        //se n�o encontrado, throw new NotFound();
-        //placeholder
-
-        if (!Objects.equals(this.getEmail(), User.this.email)){
-            throw new NotFound();
-        }
-
-        return Math.toIntExact(this.id);
-    }
-
     @Override
     public String toString() {
         return "User: {" +
@@ -106,25 +89,31 @@ public class User {
                 ", email=" + email + '\'' +
                 "}";
     }
-    public int update(String name, String email, String password, Long id)throws NotFound, CustomException {
 
-        //conectar no banco de dados
-        //buscar usu�rio por email
-        //retornar usu�rio encontrado
-        //se n�o encontrado, throw new NotFound();
-        //placeholder
-
-        if (!Objects.equals(this.getEmail(), User.this.email)){
-            throw new NotFound();
+    void checkPassword(String password) throws WrongPassword {
+        if (!Objects.equals(this.getPassword(), password)){
+            throw new WrongPassword();
         }
-        if (length(password)<12){
-            throw new CustomException();
-        }
+    }
+    private void checkName(String name) throws CustomException {
         if (length(name)<8){
             throw new CustomException();
         }
-
-        return Math.toIntExact(this.id);
     }
+
+    private void checkEmail(String email) throws CustomException {
+        if (length(email)<8){
+            throw new CustomException();
+        }
+    }
+
+    Class<? extends User> searchUser(String email)  throws NotFound {
+        if (!Objects.equals(this.getEmail(), email)){
+            throw new NotFound();
+        }
+
+        return this.getClass();
+    }
+
 
 }

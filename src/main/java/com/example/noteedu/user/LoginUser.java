@@ -3,28 +3,28 @@ package com.example.noteedu.user;
 import com.example.noteedu.customExceptions.NotFound;
 import com.example.noteedu.customExceptions.WrongPassword;
 
-public class LoginUser extends User {
+public class LoginUser  extends User{
 
-
-        public LoginUser(String name, String email, String password, Long id) {
-            super(name, email, password, id);
+        public LoginUser(String name, String email,  String password) {
+            super(name, email, password);
         }
 
 
-        public int update(String name, String email, String password, Long id) {
-
-            String answer = null;
+        public int editar(Long id, String name, String email, String password) {
+            int answer = 0;
+            Class<? extends User> a;
             try {
                 this.checkPassword(password);
-                answer = String.valueOf(searchUser(email));
-               System.out.println(answer); //placeholder
+                a = searchUser(email);
+
+                
             }
             catch (Exception e) {
                 if (e instanceof NotFound) {
                     System.out.println("Usu�rio n�o existe");
                 }
                 else if (e instanceof WrongPassword) {
-                    System.out.println("Senha incorreta");
+                    System.out.println("password incorreta");
                 }
                 else {
                     System.out.println("Erro desconhecido");
@@ -33,5 +33,6 @@ public class LoginUser extends User {
             return answer;
         }
 
-
 }
+
+

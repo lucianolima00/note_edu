@@ -1,5 +1,7 @@
 package com.example.noteedu.postit;
 
+import com.example.noteedu.customExceptions.CustomException;
+import com.example.noteedu.customExceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,21 +28,32 @@ public class PostItService {
     }
 
     @Transactional
-    public void updatePostIt(Long id, String title, String description) {
+    public void updatePostIt(Long id, String title, String description) throws CustomException, NotFound {
         PostIt postIt = postItRepository.findById(id).orElseThrow(() -> new IllegalStateException("postIt with id "+ id + " does not exist"));
-
-        if (title != null && title.length() > 0 && !Objects.equals(postIt.getTitle(), title)){
-            postIt.setTitle(title);
+        if(title != null) {
+            if (title.length() > 0 && !Objects.equals(postIt.getTitle(), title)) {
+                postIt.setTitle(title);
+            } else {
+                throw new CustomException();
+            }
+        } else{
+            throw new NotFound();
+        }
+        if(description != null){
+            if ( description.length() >15 && !Objects.equals(postIt.getDescription(), description)){
+                postIt.setDescription(description);
+            } else {
+                throw new CustomException();
+            }
+        } else {
+            throw new NotFound();
         }
 
-        if (description != null && description.length() > 0 && !Objects.equals(postIt.getDescription(), description)){
-            postIt.setDescription(description);
-        }
+
     }
 
     public void deletePostIt(Long id) {
         PostIt postIt = postItRepository.findById(id).orElseThrow(() -> new IllegalStateException("postIt with id "+ id + " does not exist"));
-
         postItRepository.delete(postIt);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.noteedu.notebook;
 
+import com.example.noteedu.customExceptions.CustomException;
+import com.example.noteedu.customExceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +28,26 @@ public class NotebookService {
     }
 
     @Transactional
-    public void updateNotebook(Long id, String name, String color) {
+    public void updateNotebook(Long id, String name, String color) throws NotFound, CustomException {
         Notebook notebook = notebookRepository.findById(id).orElseThrow(() -> new IllegalStateException("notebook with id "+ id + " does not exist"));
-
-        if (name != null && name.length() > 0 && !Objects.equals(notebook.getName(), name)){
-            notebook.setName(name);
+        if(name != null ) {
+            if ( name.length() > 5 && !Objects.equals(notebook.getName(), name)){
+                notebook.setName(name);
+            } else {
+                throw new CustomException();
+            }
+        } else{
+            throw new NotFound();
         }
 
-        if (color != null && color.length() > 0 && !Objects.equals(notebook.getColor(), color)){
-            notebook.setColor(color);
+        if(color != null ) {
+            if ( color.length() > 0 && !Objects.equals(notebook.getColor(), color)){
+                notebook.setColor(color);
+            } else {
+                throw new CustomException();
+            }
+        } else{
+            throw new NotFound();
         }
     }
 

@@ -1,5 +1,7 @@
 package com.example.noteedu.notebook;
 
+import com.example.noteedu.customExceptions.CustomException;
+import com.example.noteedu.customExceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +32,7 @@ public class NotebookController {
     public void update(
             @PathVariable("notebookId") Long id,
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String color) {
+            @RequestParam(required = false) String color) throws CustomException, NotFound {
         notebookService.updateNotebook(id, name, color);
     }
 
