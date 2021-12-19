@@ -1,11 +1,16 @@
 package com.example.noteedu.note;
 
+import com.example.noteedu.customExceptions.CustomException;
+import com.example.noteedu.customExceptions.NotFound;
+import com.example.noteedu.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
+
+import static jdk.nashorn.internal.objects.ArrayBufferView.length;
 
 @Service
 public class NoteService {
@@ -26,15 +31,20 @@ public class NoteService {
     }
 
     @Transactional
-    public void updateNote(Long id, String title, String description) {
+    public void updateNote(Long id, String title, String description) throws CustomException {
         Note note = noteRepository.findById(id).orElseThrow(() -> new IllegalStateException("note with id "+ id + " does not exist"));
 
-        if (title != null && title.length() > 0 && !Objects.equals(note.getTitle(), title)){
+        if (title != null && title.length() > 6 && !Objects.equals(note.getTitle(), title)){
             note.setTitle(title);
+        }else {
+                throw new CustomException(description);
+
         }
 
-        if (description != null && description.length() > 0 && !Objects.equals(note.getDescription(), description)){
+        if (description != null && description.length() > 15 && !Objects.equals(note.getDescription(), description)){
             note.setDescription(title);
+        } else {
+            throw new CustomException(description);
         }
     }
 

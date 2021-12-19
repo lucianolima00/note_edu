@@ -1,10 +1,14 @@
 package com.example.noteedu.user;
 
+import java.util.Set;
+import java.util.Objects;
+import javax.persistence.*;
 import com.example.noteedu.note.Note;
 import com.example.noteedu.reminder.Reminder;
-
-import javax.persistence.*;
-import java.util.Set;
+import com.example.noteedu.customExceptions.NotFound;
+import com.example.noteedu.customExceptions.WrongPassword;
+import com.example.noteedu.customExceptions.CustomException;
+import static jdk.nashorn.internal.objects.ArrayBufferView.length;
 
 @Entity
 @Table
@@ -40,6 +44,9 @@ public class User {
 
     }
 
+    public User(String name, String email, String password, Long id) {
+    }
+
     public Long getId() {
             return id;
         }
@@ -72,6 +79,25 @@ public class User {
         this.password = password;
     }
 
+    public void checkPassword(String password) throws WrongPassword{
+        if (!Objects.equals(this.getPassword(), User.this.password)){
+            throw new WrongPassword();
+        }
+    }
+    public int searchUser(String email) throws NotFound {
+        //conectar no banco de dados
+        //buscar usu�rio por email
+        //retornar usu�rio encontrado
+        //se n�o encontrado, throw new NotFound();
+        //placeholder
+
+        if (!Objects.equals(this.getEmail(), User.this.email)){
+            throw new NotFound();
+        }
+
+        return Math.toIntExact(this.id);
+    }
+
     @Override
     public String toString() {
         return "User: {" +
@@ -79,6 +105,26 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email=" + email + '\'' +
                 "}";
+    }
+    public int update(String name, String email, String password, Long id)throws NotFound, CustomException {
+
+        //conectar no banco de dados
+        //buscar usu�rio por email
+        //retornar usu�rio encontrado
+        //se n�o encontrado, throw new NotFound();
+        //placeholder
+
+        if (!Objects.equals(this.getEmail(), User.this.email)){
+            throw new NotFound();
+        }
+        if (length(password)<12){
+            throw new CustomException();
+        }
+        if (length(name)<8){
+            throw new CustomException();
+        }
+
+        return Math.toIntExact(this.id);
     }
 
 }

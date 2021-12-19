@@ -47,13 +47,22 @@ public class PostIt extends Note {
 
     @Override
     public String toString() {
-        return "PostIt: {" +
-                "id=" + super.getId() +
-                ", title='" + super.getTitle() + '\'' +
-                ", description='" + super.getDescription() + '\'' +
-                ", due_date='" + dueDate + '\'' +
-                ", color='" + color + '\'' +
-                ", user='" + super.getUser().toString() + '\'' +
-                "}";
+        String dados = null;
+        try {
+           dados = "PostIt: {" +
+                    "id=" + super.getId() +
+                    ", title='" + super.getTitle() + '\'' +
+                    ", description='" + super.getDescription() + '\'' +
+                    ", due_date='" + dueDate + '\'' +
+                    ", color='" + color + '\'' +
+                    ", user='" + super.getUser().toString() + '\'' +
+                    "}";
+        }
+        catch(NullPointerException e){
+            //TRATAMENTO DA exceção
+            System.out.println("Message:"+e.getMessage()+" . Para solucionar tal o problema, foi lhe atribuído um valor default.");
+
+        }
+        return dados;
     }
 }
