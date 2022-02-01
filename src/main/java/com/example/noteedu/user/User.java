@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
-import static jdk.nashorn.internal.objects.ArrayBufferView.length;
 
 @Entity
 @Table
@@ -40,7 +39,9 @@ public class User {
 
     @ManyToMany(mappedBy = "guests")
     private Set<Reminder> reminders;
+    public static void main(String[] args) {
 
+    }
 
     public User() {
 
@@ -96,13 +97,13 @@ public class User {
         }
     }
     private void checkName(String name) throws CustomException {
-        if (length(name)<8){
+        if (name.length()<8){
             throw new CustomException();
         }
     }
 
     private void checkEmail(String email) throws CustomException {
-        if (length(email)<8){
+        if (email.length()<8){
             throw new CustomException();
         }
     }
