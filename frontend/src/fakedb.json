@@ -1,0 +1,92 @@
+{
+    "users": [
+        {
+            "name": "maria",
+            "password": "123",
+            "notebook": [
+                {
+                    "name": "Homeworks",
+                    "notes": [
+                        {
+                            "id": 0,
+                            "title": "POO homework",
+                            "description": "",
+                            "finished": false,
+                            "postIt": [],
+                            "reminders": [
+                                {
+                                    "dueDate": "01/04/2022"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "DB Homework",
+                            "description": "",
+                            "finished": false,
+                            "postIt": [],
+                            "reminders": [
+                                {
+                                    "dueDate": "01/04/2022"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "HMI Homework",
+                            "description": "",
+                            "finished": false,
+                            "postIt": [],
+                            "reminders": [
+                                {
+                                    "dueDate": "01/04/2022"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Classes",
+                    "notes": [
+                        {
+                            "id": 5,
+                            "title": "Class About Species",
+                            "description": "",
+                            "finished": false,
+                            "postIt": [
+                                {
+                                    "dueDate": "01/04/2022"
+                                }
+                            ],
+                            "reminders": []
+                        },
+                        {
+                            "id": 6,
+                            "title": "Class About Classes",
+                            "description": "",
+                            "finished": false,
+                            "postIt": [
+                                {
+                                    "dueDate": "01/04/2022"
+                                }
+                            ],
+                            "reminders": []
+                        },
+                        {
+                            "id": 7,
+                            "title": "Class About Breath",
+                            "description": "I didn't control your breath, did I?",
+                            "finished": false,
+                            "postIt": [
+                                {
+                                    "dueDate": "01/04/2022"
+                                }
+                            ],
+                            "reminders": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
