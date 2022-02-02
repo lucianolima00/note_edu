@@ -48,7 +48,7 @@ export default function Dashboard({ username, notebooks, reminders, postits }) {
         : <p>Nenhum reminder</p>
     }
     {
-      Postits.length ?
+      postits.length ?
         <div>
           <CardRow
             rowTitle={"Postits"}

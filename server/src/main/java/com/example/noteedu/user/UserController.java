@@ -2,8 +2,6 @@ package com.example.noteedu.user;
 
 import java.util.List;
 
-import com.example.noteedu.reminder.Reminder;
-import com.example.noteedu.reminder.ReminderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
