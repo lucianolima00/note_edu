@@ -6,7 +6,7 @@ import { useRoutes } from 'react-router-dom';
 import Dashboard from './containers/Dashboard';
 import UIState from './components/UIState';
 import Header from './components/Header';
-import { getNotebooks, getPostits, getReminders } from './api';
+import api from './services/api';
 
 function App() {
   const [username, setUsername] = useState("");
@@ -16,12 +16,18 @@ function App() {
   const [postits, setPostits] = useState([]);
 
   useEffect(() => {
-    getNotebooks(username, setNotebooks)
-    getReminders(username, setReminders)
-    getPostits(username, setPostits)
-    return () => {
-     
-    }
+    api.get('/user').then(response => {
+      setUsername(response.data)
+    });
+    
+    api.get('/notebook').then(response => {
+      console.log(response);
+      setNotebooks(response.data)
+    });
+    
+    api.get('/reminders').then(response => {
+      setReminders(response.data)
+    });
   }, [username])
 
   return (
