@@ -1,11 +1,7 @@
 package com.example.noteedu.user;
 
 import com.example.noteedu.customExceptions.CustomException;
-import com.example.noteedu.customExceptions.RollbackExceptionCustom;
 import com.example.noteedu.customExceptions.WrongPassword;
-import com.example.noteedu.user.User;
-import com.example.noteedu.user.UserRepository;
-import com.example.noteedu.tag.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
