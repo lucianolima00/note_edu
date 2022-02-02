@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import CardRow from '../components/CardRow';
 
-export default function Dashboard({ username, notebooks }) {
+export default function Dashboard({ username, notebooks, reminders, postits }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -12,49 +13,56 @@ export default function Dashboard({ username, notebooks }) {
       // cleanup
     }
   }, []);
-  console.log('notebooks.map()', notebooks.map((notebook)=>({title:notebook.name, description: notebook.notes[0].title})));
-  return notebooks.length ?
-    <div>
-      <CardRow rowTitle={"Notebooks"} cards={notebooks.map((nb) => ({ title: nb.name, description: nb.notes[0].title }))} />
-    </div>
-    : <p>Nenhum notebook</p>;
-}
-
-function CardRow({ rowTitle, cards }) {
-  return (
-    <div style={container}>
-      <div>{rowTitle}</div>
-      <div style={rowCard}>
-        {cards.map(({ title, description, dueDate }, index) => {
-          return index < 3 && (<div style={cardStyle}>
-            <h5>{title}</h5>
-            <p>{dueDate && <strong>{dueDate}</strong>}</p>
-            <p>{description}</p>
-          </div>)
-        })}
-      </div>
-    </div>
-  )
-}
-
-const cardStyle = {
-  backgroundColor: "#92CC49",
-  display: "flex",
-  margin: "35px",
-  padding: "50px",
-  width: "20%",
-  heigth: "20%",
-  border: "2px",
-}
-
-const container = {
-  width: "100%",
-  display: "flex",
-}
-
-const rowCard = {
-  flexFlow: "row nowrap",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center"
+  return <div>
+    {
+      notebooks.length ?
+        <div>
+          <CardRow
+            rowTitle={"Notebooks"} 
+            addButtonLocation={"/addNotebook"}
+            cards={notebooks.map(
+                notebook => ({ 
+                  title: notebook.name, 
+                  description: notebook.notes[0].description 
+                })
+              )} 
+            />
+        </div>
+        : <p>Nenhum notebook</p>
+    }
+    {
+      reminders.length ?
+        <div>
+          <CardRow
+            rowTitle={"Reminders"}
+            addButtonLocation={'/addRemider'}
+            cards={reminders.map(
+              reminder => ({
+                id: reminder.id,
+                title: reminder.title,
+                description: reminder.description,
+                dueDate: reminder.reminder[0].dueDate
+              }))}
+          />
+        </div>
+        : <p>Nenhum reminder</p>
+    }
+    {
+      Postits.length ?
+        <div>
+          <CardRow
+            rowTitle={"Postits"}
+            addButtonLocation={'/addPostit'}
+            cards={postits.map(
+              postit => ({
+                id: postit.id,
+                title: postit.title,
+                description: postit.description,
+                dueDate: postit.postit[0].dueDate
+              }))}
+          />
+        </div>
+        : <p>Nenhum postit</p>
+    }
+  </div>
 }

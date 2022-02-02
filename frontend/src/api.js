@@ -27,3 +27,27 @@ export const getNotebooks = (username, callback) => {
     );
     return callback(notebooks);
 }
+
+export const getPostits = (username, callback) => {
+    let postits = [];
+    fakedb.users.map(
+        u=>{
+            if (u.name == username){
+                postits = u.notes.filter(nt => !!nt.postit.length)
+            }
+        }
+    );
+    return callback(postits);
+}
+
+export const getReminders = (username, callback) => {
+    let reminders = [];
+    fakedb.users.map(
+        u=>{
+            if (u.name == username){
+                reminders = u.notes.filter(nt => !!nt.reminder.length)
+            }
+        }
+    );
+    return callback(reminders);
+}
