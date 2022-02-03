@@ -1,7 +1,12 @@
+@import url('http://fonts.cdnfonts.com/css/porter-sans-block');
+
 html, body{
   margin: 0;
   padding: 0;
-  box-sizing: 'border-box';
+}
+*{
+  box-sizing: border-box;
+
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -14,4 +19,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+button {
+  font-weight: 900;
+  margin: 8px;
+  padding: 8px 48px;
+  border-radius: 8px;
+  background-color: white;
+  border: 4px solid #333;
+  text-transform: uppercase;
+  box-shadow: 0 3px 2px #0005;
+}
+
+button.primary {
+  background-color: #f5f242;
 }

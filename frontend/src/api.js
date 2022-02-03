@@ -2,9 +2,9 @@ import fakedb from './fakedb.json';
 
 export const login = ({username, password}, callback) => {
     let user = {error: "Usuário não encontrado"};
-    fakedb.users.map(u => {
-        if(u.name == username){
-            if(u.password == password){
+    fakedb.users.forEach(u => {
+        if(u.name === username){
+            if(u.password === password){
                 user = u;
             } else {
                 user = {error: "Senha incorreta"};
@@ -18,9 +18,9 @@ export const login = ({username, password}, callback) => {
 
 export const getNotebooks = (username, callback) => {
     let notebooks = [];
-    fakedb.users.map(
+    fakedb.users.forEach(
         u=>{
-            if (u.name == username){
+            if (u.name === username){
                 notebooks = u.notebook;
             }
         }
@@ -30,9 +30,9 @@ export const getNotebooks = (username, callback) => {
 
 export const getPostits = (username, callback) => {
     let postits = [];
-    fakedb.users.map(
+    fakedb.users.forEach(
         u=>{
-            if (u.name == username){
+            if (u.name === username){
                 postits = u.notes.filter(nt => !!nt.postit.length)
             }
         }
@@ -42,9 +42,9 @@ export const getPostits = (username, callback) => {
 
 export const getReminders = (username, callback) => {
     let reminders = [];
-    fakedb.users.map(
+    fakedb.users.forEach(
         u=>{
-            if (u.name == username){
+            if (u.name === username){
                 reminders = u.notes.filter(nt => !!nt.reminder.length)
             }
         }

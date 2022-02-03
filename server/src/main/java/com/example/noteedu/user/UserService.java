@@ -58,4 +58,21 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException("user with id "+ id + " does not exist"));
         userRepository.delete(user);
     }
+
+    public List<User> getByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+    public int validateLogin(User user){
+        try{
+            List<User> users = getByEmail(user.getEmail());
+            User u = users.get(0);
+            u.checkPassword(u.getPassword());
+            return 1;
+        } catch(Exception e){
+            System.out.println("UserService.validateLogin()");
+            System.out.println(e.toString());
+        }
+        return 0;
+    }
 }

@@ -3,19 +3,20 @@ import {useNavigate} from 'react-router-dom';
 import TextInput from '../components/TextInput';
 import api from '../services/api';
 
-export const AddReminder = ({reminders, setReminders}) => {
+export const AddPostit = ({postits, setPostits}) => {
     // const [error, setError] = useState();
     let navigate = useNavigate();
     function handleSubmit(event){
         event.preventDefault();
         let formData = new FormData(event.currentTarget);
         const title = formData.get('title');
-        const dueDate = formData.get('dueDate') + "T00:00:00.000";
+        //isso se chama pressa:
+        const dueDate = JSON.parse(JSON.stringify(new Date((new Date()).getTime() + 86400000)));
         const notebook = formData.get('notebook');
         const description = formData.get('description');
         console.log({title, dueDate, notebook, description});
-        api.post('/reminder', {title, dueDate, notebook, description}).then(res => {
-            res?.data && setReminders([res.data, ...reminders])
+        api.post('/postIt', {title, dueDate, notebook, description}).then(res => {
+            res?.data && setPostits([res.data, ...postits])
             goToPreviousPath();
         });
     }
@@ -23,24 +24,18 @@ export const AddReminder = ({reminders, setReminders}) => {
         navigate(-1);
     }
     return <div style={container}>
-        <h2>New Reminder</h2>
+        <h2>New Post-It</h2>
         <form onSubmit={handleSubmit}>
-            <TextInput
-                name={'title'}
-                label={'Title'}
-                type={'text'}
-            />
             <div style={{display: 'flex', flexFlow: 'row nowrap', width: '100%', justifyContent: 'space-between'}}>
                 <TextInput
-                    name={'dueDate'}
-                    label={'Due Date'}
+                    name={'title'}
+                    label={'Title'}
                     type={'text'}
                     style={{width: '47%'}}
-                    placeholder={"aaaa-mm-dd"}
-                    />
+                />
                 <TextInput
                     name={'notebook'}
-                    label={'Notebook'}
+                    label={'Notebook (Opcional)'}
                     type={'text'}
                     style={{width: '47%'}}
                 />
@@ -51,7 +46,7 @@ export const AddReminder = ({reminders, setReminders}) => {
                 type={'textarea'}
             />
             <div style={buttonRow}>
-                <button type={"button"} onClick = {goToPreviousPath}>
+                <button type={'button'} onClick={goToPreviousPath}>
                     BACK
                 </button>
                 <button className={'primary'} type={'submit'}>

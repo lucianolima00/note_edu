@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { login } from '../api';
+import Form from '../components/Form';
+import TextInput from '../components/TextInput';
+import api from '../services/api';
 
 export default function LoginPage({setUsername, setLoading, loading}) {
     let navigate = useNavigate();
@@ -11,40 +14,39 @@ export default function LoginPage({setUsername, setLoading, loading}) {
         if(!loading){
             setLoading(true);
             let formData = new FormData(event.currentTarget);
-            let username = formData.get("username");
+            let email = formData.get("email");
             let password = formData.get("password");
             
-            login({username, password}, (data) => {
-                if(data.error){
-                    setError(data.error);
-                    console.log('data.error', data.error);
-                } else {
-                    setUsername(data.name);
+            api.post('/user/login', {email, password}).then((res) => {
+                const { data } = res;
+                if(data && data.email){
+                    console.log('a')
+                    setUsername(data.name || data.email);
                     navigate('/', { replace: true });
-                    console.log('data', data);
+                } else if(data.error){
+                    console.log('b')
+                    setError(data.message);
                 }
+                console.log('c')
+                console.log('aqui1', data);
                 setLoading(false);
-            })
+            }, reason => {
+                console.log('aqui2', reason);
+                setLoading(false);
+                setError("Email or password Incorrect");
+            });
         }
     }
 
     return (
         <div>
-            <p>You must log in to view the page at my ass</p>
-
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Username: 
-                    <input name="username" type="text" />
-                </label>
-                <br/>
-                <label>
-                    Password: 
-                    <input name="password" type="text" />
-                </label><br/>
+            <Form title={"Login"} onSubmit={handleSubmit}>
+                <TextInput name={"email"} type={"text"} label={"Email"}/>
+                <TextInput name={"password"} type={"password"} label={"Password"}/>
                 {error && (<div>{error}</div>)}
-                <button type="submit">Login</button>
-            </form>
+                <button className={"primary"} type="submit">Login</button><br/>
+                <Link to="/signup">Don't have an account? Create one for free</Link>
+            </Form>
         </div>
     );
 }
