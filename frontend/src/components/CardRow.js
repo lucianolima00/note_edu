@@ -6,7 +6,7 @@ export default function CardRow({ rowTitle, cards, addButtonLocation }) {
       <div style={container}>
         <div>{rowTitle}</div>
         <div style={rowCard}>
-          {cards.map(({ id, title, description, dueDate }, index) => {
+          {cards?.reverse().map(({ id, title, description, dueDate }, index) => {
             return index < 3 && (<div key={id} style={cardStyle}>
               <h4 style={cardTitle}>{title}</h4>
               <h5 style={cardSubtitle}>{dueDate && <strong>{dueDate}</strong>}</h5>

@@ -1,11 +1,7 @@
 package com.example.noteedu.user;
 
 import com.example.noteedu.customExceptions.CustomException;
-import com.example.noteedu.customExceptions.RollbackExceptionCustom;
 import com.example.noteedu.customExceptions.WrongPassword;
-import com.example.noteedu.user.User;
-import com.example.noteedu.user.UserRepository;
-import com.example.noteedu.tag.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +57,22 @@ public class UserService {
     public void deleteUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException("user with id "+ id + " does not exist"));
         userRepository.delete(user);
+    }
+
+    public List<User> getByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+    public int validateLogin(User user){
+        try{
+            List<User> users = getByEmail(user.getEmail());
+            User u = users.get(0);
+            u.checkPassword(u.getPassword());
+            return 1;
+        } catch(Exception e){
+            System.out.println("UserService.validateLogin()");
+            System.out.println(e.toString());
+        }
+        return 0;
     }
 }
